@@ -1,6 +1,6 @@
 package engine.piece;
 
-public enum Alliance {
+public enum Set {
     BLACK,
     WHITE
 }

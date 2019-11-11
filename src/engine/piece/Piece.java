@@ -1,6 +1,12 @@
 package engine.piece;
 
+import engine.board.Move;
+import engine.board.Board;
+import java.util.List;
+
 public interface Piece {
-    public String toString();
-    public void setAlliance(final Alliance alliance);
+    void setSet(final Set set);
+    void setPiecePosition(final int piecePosition);
+    List<Move> legalMoves(final Board board);
+    String toString();
 }
