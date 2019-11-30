@@ -1,7 +1,10 @@
 package engine.board;
 
-import engine.Colour;
+import engine.utility.Set;
 import engine.piece.*;
+import engine.utility.Colour;
+
+import java.util.List;
 
 public class Board {
 
@@ -25,6 +28,11 @@ public class Board {
     //This method returns the size of the board
     public int size() {
         return BOARD_SIZE;
+    }
+
+    //This method returns the Tile at given coordinate
+    public Tile getTile(final int coordinate) {
+        return board[coordinate];
     }
 
     //This sets the initial game board
@@ -70,9 +78,11 @@ public class Board {
 
     //This method prints the board to the console
     public void print() {
+
         int x = 1;
         int y = 0;
         System.out.println();
+        System.out.println(Colour.GREEN + "a b c d e f g h\n" + Colour.RESET);
         for (int i=0; i<board.length; i++) {
             if (board[i].getPiece() == null) {
                 System.out.print("x" + " ");

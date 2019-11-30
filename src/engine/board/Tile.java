@@ -13,6 +13,7 @@ public class Tile {
     //constructor
     public Tile(final int coordinate) {
         this.coordinate = coordinate;
+        this.piece = null;
     }
 
     //constructor
@@ -38,6 +39,10 @@ public class Tile {
          } else {
              return false;
          }
+    }
+
+    public void removePiece() {
+        piece = null;
     }
 
     //This method sets piece to tile

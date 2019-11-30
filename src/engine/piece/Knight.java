@@ -1,9 +1,11 @@
 package engine.piece;
 
-import engine.Colour;
+import engine.utility.Set;
+import engine.utility.Colour;
 import engine.board.Board;
-import engine.board.Move;
+import engine.utility.Utility;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Knight implements Piece {
@@ -12,31 +14,68 @@ public class Knight implements Piece {
     private int piecePosition;
     private Set set;
 
+    //offsets derived from https://en.wikipedia.org/wiki/Knight_(chess)
+    private final static int[] offsets = {-17, -15, -10, -6, 6, 10, 15, 17};
+
     public Knight(final int piecePosition, final Set set) {
         this.piecePosition = piecePosition;
         this.set = set;
     }
 
-
-    @Override
     public void setSet(final Set set) {
         this.set = set;
     }
 
-    @Override
+    public Set getSet() {
+        return set;
+    }
+
     public void setPiecePosition(final int piecePosition) {
         this.piecePosition = piecePosition;
     }
 
-    @Override
-    public List<Move> legalMoves(Board board) {
-        return null;
+    //This method calculates and returns a list of legal moves of the KNIGHT piece
+    public List<Integer> legalMoves(final Board board) {
+
+        List<Integer> list = new ArrayList<>();
+
+        for (int i=0; i<offsets.length; i++) {
+           int destination = this.piecePosition + offsets[i];
+           //if destination is within bounds
+           if (Utility.isValid(destination)) {
+               //if offset rule breaks down in specified columns
+               if (checkColumnException(this.piecePosition, offsets[i]))
+                   continue;
+               //if destination tile is NOT occupied
+               if (!board.getTile(destination).isOccupied()) {
+                   list.add(destination);
+               } else {
+                   //if destination tile IS occupied --is the occupant an enemy piece
+                   if (this.set != board.getTile(destination).getPiece().getSet()) {
+                       list.add(destination);
+                   }
+               }
+           }
+        }
+        return list;
     }
 
-    @Override
+    //This method excludes all destination tiles that don't fit the offset rule
+    private boolean checkColumnException(final int piecePosition, final int offset) {
+        if (Utility.isFirstColumn[piecePosition] && (offset == -17 || offset == -10  || offset == 6 || offset == 15)) {
+            return true;
+        } else if (Utility.isSecondColumn[piecePosition] && (offset == -10 || offset == 6)) {
+            return true;
+        } else if (Utility.isSeventhColumn[piecePosition] && (offset == -6 || offset == 10)) {
+            return true;
+        } else if (Utility.isEighthColumn[piecePosition]  && (offset == -6 || offset == -15 || offset == 17 || offset == -15)) {
+            return true;
+        }
+        return false;
+    }
+
     public String toString() {
         return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name + Colour.RESET;
     }
-
 
 }

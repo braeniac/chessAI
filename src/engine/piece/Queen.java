@@ -1,8 +1,8 @@
 package engine.piece;
 
-import engine.Colour;
+import engine.utility.Set;
+import engine.utility.Colour;
 import engine.board.Board;
-import engine.board.Move;
 
 import java.util.List;
 
@@ -28,7 +28,12 @@ public class Queen implements Piece {
     }
 
     @Override
-    public List<Move> legalMoves(Board board) {
+    public Set getSet() {
+        return set;
+    }
+
+    @Override
+    public List<Integer> legalMoves(Board board) {
         return null;
     }
 

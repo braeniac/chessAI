@@ -1,8 +1,8 @@
 package engine.piece;
 
-import engine.Colour;
+import engine.utility.Set;
+import engine.utility.Colour;
 import engine.board.Board;
-import engine.board.Move;
 
 import java.util.List;
 
@@ -12,31 +12,41 @@ public class Bishop implements Piece {
     private Set set;
     private int piecePosition;
 
+    //offsets derived from https://en.wikipedia.org/wiki/B_(chess)
+    private final static int[] offsets = {-17, -15, -10, -6, 6, 10, 15, 17};
+
     public Bishop(final int piecePosition, final Set set) {
         this.piecePosition = piecePosition;
         this.set = set;
     }
 
-    @Override
+
     public void setPiecePosition(final int piecePosition) {
         this.piecePosition = piecePosition;
     }
 
-    @Override
+
     public void setSet(Set set) {
         this.set = set;
     }
 
-    @Override
-    public List<Move> legalMoves(Board board) {
+
+    public Set getSet() {
+        return set;
+    }
+
+
+    public List<Integer> legalMoves(Board board) {
+
+
+
+
+
         return null;
     }
 
-    @Override
     public String toString() {
         return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name + Colour.RESET;
     }
-
-
 
 }

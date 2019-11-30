@@ -1,4 +1,4 @@
-package engine.piece;
+package engine.utility;
 
 public enum Set {
     BLACK,
