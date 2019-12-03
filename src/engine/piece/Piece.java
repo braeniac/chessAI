@@ -10,4 +10,7 @@ public interface Piece {
     void setPiecePosition(final int piecePosition);
     List<Integer> legalMoves(final Board board);
     String toString();
+    String getName();
+    void firstMove();
+    boolean getFirstMove();
 }

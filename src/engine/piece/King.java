@@ -11,10 +11,12 @@ public class King implements Piece {
     private final String name = "K";
     private Set set;
     private int piecePosition;
+    private boolean firstMove;
 
     public King(final int piecePosition, final Set set) {
         this.piecePosition = piecePosition;
         this.set = set;
+        this.firstMove = false;
     }
 
     @Override
@@ -35,6 +37,18 @@ public class King implements Piece {
     @Override
     public List<Integer> legalMoves(Board board) {
         return null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void firstMove() {
+        this.firstMove = true;
+    }
+
+    public boolean getFirstMove() {
+        return this.firstMove;
     }
 
     @Override

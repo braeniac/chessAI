@@ -11,10 +11,12 @@ public class Queen implements Piece {
     private final String name = "Q";
     private Set set;
     private int piecePosition;
+    private boolean firstMove;
 
     public Queen(final int piecePosition, final Set set) {
         this.piecePosition = piecePosition;
         this.set = set;
+        this.firstMove = false;
     }
 
     @Override
@@ -35,6 +37,18 @@ public class Queen implements Piece {
     @Override
     public List<Integer> legalMoves(Board board) {
         return null;
+    }
+
+    public void firstMove() {
+        this.firstMove = true;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getFirstMove() {
+        return this.firstMove;
     }
 
     @Override

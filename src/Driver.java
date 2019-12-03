@@ -1,12 +1,9 @@
 import engine.board.Board;
-import engine.piece.Piece;
 import engine.player.Player;
 import engine.utility.Check;
 import engine.utility.Set;
 import engine.utility.Utility;
 
-import java.sql.SQLOutput;
-import java.util.List;
 import java.util.Scanner;
 
 public class Driver {
@@ -16,7 +13,6 @@ public class Driver {
 
     //game information
     private Board board;
-    private static final int DRAW = 50;
     private Boolean winner;
     private Boolean validMove;
     private int turn;
@@ -57,11 +53,15 @@ public class Driver {
 
                 if (player == human.getName()) {
                     System.out.print("Human, make your move (i.e a7,a6):  ");
-                    input = in.nextLine();
-                    command = Utility.readCommand(input);
-                    start = command[0];
-                    end = command[1];
-                    validMove = Check.validate(human, board, command[0], command[1]);
+                    input = in.nextLine().toLowerCase();
+                    if (input.equals("exit")) {
+                        System.exit(0);
+                    } else {
+                        command = Utility.readCommand(input);
+                        start = command[0];
+                        end = command[1];
+                        validMove = Check.validate(human, board, start, end);
+                    }
                 } else if (player == AI.getName()) {
                     System.out.print("AI, moves (i.e a7,a6):  ");
                     input = in.nextLine();
@@ -70,28 +70,25 @@ public class Driver {
                     end = command[1];
                     validMove = Check.validate(AI, board, start, end);
                 }
-
                 if (!validMove) {
                     System.out.println("\nPlease try again!");
                 }
 
             } while (!validMove);
 
+            //makes the move
             if (player == "human") {
                 human.makeMove(board, start, end);
                 System.out.println("Acquired pieces: " + human.getOpponentPieces());
             } else {
                 AI.makeMove(board, start, end);
-
-
-
                 System.out.println("Acquired pieces: " + AI.getOpponentPieces());
             }
 
             //check if player has winning move
             winner = Check.hasWinningMove();
 
-            //break out if current has winning move
+            //break out if current player has winning move
             if (winner) {
                 System.out.println("\nWinning board: ");
                 break;

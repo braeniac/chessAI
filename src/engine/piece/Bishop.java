@@ -11,6 +11,7 @@ public class Bishop implements Piece {
     private final String name = "B";
     private Set set;
     private int piecePosition;
+    private boolean firstMove;
 
     //offsets derived from https://en.wikipedia.org/wiki/B_(chess)
     private final static int[] offsets = {-17, -15, -10, -6, 6, 10, 15, 17};
@@ -18,6 +19,7 @@ public class Bishop implements Piece {
     public Bishop(final int piecePosition, final Set set) {
         this.piecePosition = piecePosition;
         this.set = set;
+        this.firstMove = false;
     }
 
 
@@ -43,6 +45,19 @@ public class Bishop implements Piece {
 
 
         return null;
+    }
+
+
+    public void firstMove() {
+        this.firstMove = true;
+    }
+
+    public boolean getFirstMove() {
+        return this.firstMove;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public String toString() {

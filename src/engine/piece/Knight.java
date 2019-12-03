@@ -13,6 +13,7 @@ public class Knight implements Piece {
     private final String name = "N";
     private int piecePosition;
     private Set set;
+    private boolean firstMove;
 
     //offsets derived from https://en.wikipedia.org/wiki/Knight_(chess)
     private final static int[] offsets = {-17, -15, -10, -6, 6, 10, 15, 17};
@@ -20,6 +21,7 @@ public class Knight implements Piece {
     public Knight(final int piecePosition, final Set set) {
         this.piecePosition = piecePosition;
         this.set = set;
+        this.firstMove = false;
     }
 
     public void setSet(final Set set) {
@@ -72,6 +74,19 @@ public class Knight implements Piece {
             return true;
         }
         return false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void firstMove() {
+        this.firstMove = true;
+    }
+
+
+    public boolean getFirstMove() {
+        return this.firstMove;
     }
 
     public String toString() {

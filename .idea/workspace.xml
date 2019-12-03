@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a20f268-298c-4c9f-946e-2959ebc4348b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/engine/player/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/engine/utility/Check.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessAI/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/Driver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/Colour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/board/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/board/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/board/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/board/Tile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/board/Utility.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/board/Move.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/board/Move.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Bishop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Bishop.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/piece/King.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/piece/King.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Knight.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Knight.class" afterDir="false" />
@@ -17,13 +12,10 @@
       <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Piece.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Piece.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Queen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Queen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Rook.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Rook.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/piece/Set.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/utility/Check.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/utility/Check.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessAI/engine/utility/Utility.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessAI/engine/utility/Utility.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Colour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/utility/Colour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/board/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/board/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/board/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/board/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/board/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/board/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/utility/Utility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/piece/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/piece/Bishop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/piece/King.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/piece/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/piece/Knight.java" afterDir="false" />
@@ -31,7 +23,8 @@
       <change beforePath="$PROJECT_DIR$/src/engine/piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/piece/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/piece/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/piece/Queen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/piece/Rook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/piece/Set.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/utility/Set.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/utility/Check.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/utility/Check.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/utility/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/utility/Utility.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
