@@ -7,7 +7,7 @@ public class Tile {
     //between 0 to 63
     private int coordinate;
 
-    //could be king, queen, bishop, knight, rook, pawn, ' '
+    //could be king, queen, bishop, knight, rook, pawn, ' ' represented as x
     private Piece piece;
 
     //constructor

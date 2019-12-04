@@ -11,6 +11,7 @@ public class Move {
 
     //This method is an non attacking move
     public static void nonAttackingMove(final Board board, final int start, final int end) {
+
         Tile startTile  = board.getTile(start);
         Tile endTile = board.getTile(end);
         Piece myPiece = board.getTile(start).getPiece();
@@ -32,11 +33,11 @@ public class Move {
             myPiece.firstMove();
         }
 
-
     }
 
     //This method is an attacking move
     public static void attackingMove(final Board board, final Player player, final int start, final int end) {
+
         Tile startTile = board.getTile(start);
         Tile endTile = board.getTile(end);
         Piece myPiece = startTile.getPiece();
@@ -87,8 +88,7 @@ public class Move {
                 break;
             }
         }
-
-
     }
+
 
 }
