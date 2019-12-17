@@ -4,12 +4,13 @@ import engine.board.Board;
 import engine.piece.Piece;
 import engine.player.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Check {
 
     //This method validates possible move
-    public static boolean validate(final Player player, final Board board, final int start, final int end)  {
+    public static boolean isMoveLegal(final Player player, final Board board, final int start, final int end)  {
 
         //if the tile at start position does NOT have a piece -- return false
         //can't move an empty piece from position start to position end
@@ -36,10 +37,44 @@ public class Check {
         }
 
         return (isMyPiece && legalMove);
+
     }
 
+    //This method checks to see if players king is in check
+    public static boolean isInCheck(final Player player, final Player opponent, final Board board) {
 
-    public static boolean hasWinningMove() {
+        //get the position of the king
+        int kingPosition = player.getPlayerKing().getPiecePosition();
+
+        //get opponents active pieces
+        List<Piece> activePieces = opponent.getPieces();
+
+        //get legal moves for all active pieces
+        List<Integer> allLegalMoves = new ArrayList<>();
+        for (int i=0; i<activePieces.size(); i++) {
+            allLegalMoves.addAll(activePieces.get(i).legalMoves(board));
+        }
+
+        //if not empty then the players king is in check
+        return legalAttackingMoves(kingPosition, allLegalMoves);
+    }
+
+    //Helper method --
+    private static boolean legalAttackingMoves(final int kingPosition, final List<Integer> allLegalMoves) {
+        for (int i=0; i<allLegalMoves.size(); i++) {
+            if (kingPosition == allLegalMoves.get(i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isInStaleMate() {
+
+        return false;
+    }
+
+    public static boolean isInCheckMate() {
 
         return false;
     }

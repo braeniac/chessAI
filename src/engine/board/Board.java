@@ -1,24 +1,36 @@
 package engine.board;
 
+import engine.player.*;
 import engine.utility.Set;
 import engine.piece.*;
 import engine.utility.Colour;
+import engine.player.BlackPlayer;
+import engine.player.WhitePlayer;
 
 import java.util.List;
 
 public class Board {
 
+    //can only have a single instance of the board class
+    private static Board SINGLE_INSTANCE = null;
+
     private static final int BOARD_SIZE = 64;
     private Tile[] board;
 
-    public Board() {
+    private Board() {
         //create the game board
         board = new Tile[BOARD_SIZE];
         for (int i=0; i<BOARD_SIZE; i++) {
             board[i] = new Tile(i);
         }
-        setBoard();
     } //constructor
+
+    public static Board getInstance() {
+        if (SINGLE_INSTANCE == null) {
+            SINGLE_INSTANCE = new Board();
+        }
+        return SINGLE_INSTANCE;
+    }
 
     //This method returns the board
     public Tile[] getBoard() {
@@ -36,43 +48,15 @@ public class Board {
     }
 
     //This sets the initial game board
-    private void setBoard() {
+    public void setBoard(final List<Piece> blackPieces, final List<Piece> whitePieces) {
 
-        //BLACK pieces
-        board[0].setPiece(new Rook(0, Set.BLACK));
-        board[1].setPiece(new Knight(1, Set.BLACK));
-        board[2].setPiece(new Bishop(2, Set.BLACK));
-        board[3].setPiece(new King(3, Set.BLACK));
-        board[4].setPiece(new Queen(4, Set.BLACK));
-        board[5].setPiece(new Bishop(5, Set.BLACK));
-        board[6].setPiece(new Knight(6, Set.BLACK));
-        board[7].setPiece(new Rook(7, Set.BLACK));
-        board[8].setPiece(new Pawn(8, Set.BLACK));
-        board[9].setPiece(new Pawn(9, Set.BLACK));
-        board[10].setPiece(new Pawn(10, Set.BLACK));
-        board[11].setPiece(new Pawn(11, Set.BLACK));
-        board[12].setPiece(new Pawn(12, Set.BLACK));
-        board[13].setPiece(new Pawn(13, Set.BLACK));
-        board[14].setPiece(new Pawn(14, Set.BLACK));
-        board[15].setPiece(new Pawn(15, Set.BLACK));
+        for (int i=0; i<blackPieces.size(); i++) {
+            board[i].setPiece(blackPieces.get(i));
+        }
 
-        //WHITE pieces
-        board[48].setPiece(new Pawn(48, Set.WHITE));
-        board[49].setPiece(new Pawn(49, Set.WHITE));
-        board[50].setPiece(new Pawn(50, Set.WHITE));
-        board[51].setPiece(new Pawn(51, Set.WHITE));
-        board[52].setPiece(new Pawn(52, Set.WHITE));
-        board[53].setPiece(new Pawn(53, Set.WHITE));
-        board[54].setPiece(new Pawn(54, Set.WHITE));
-        board[55].setPiece(new Pawn(55, Set.WHITE));
-        board[56].setPiece(new Rook(56, Set.WHITE));
-        board[57].setPiece(new Knight(57, Set.WHITE));
-        board[58].setPiece(new Bishop(58, Set.WHITE));
-        board[59].setPiece(new King(59, Set.WHITE));
-        board[60].setPiece(new Queen(60, Set.WHITE));
-        board[61].setPiece(new Bishop(61, Set.WHITE));
-        board[62].setPiece(new Knight(62, Set.WHITE));
-        board[63].setPiece(new Rook(63, Set.WHITE));
+        for (int i=0; i<whitePieces.size(); i++) {
+            board[48+i].setPiece(whitePieces.get(i));
+        }
 
     } //setBoard
 
@@ -82,12 +66,12 @@ public class Board {
         int x = 1;
         int y = 0;
         System.out.println();
-        System.out.println(Colour.GREEN + "a b c d e f g h\n" + Colour.RESET);
+        System.out.println(Colour.GREEN + "a  b  c  d  e  f  g  h\n" + Colour.RESET);
         for (int i=0; i<board.length; i++) {
             if (board[i].getPiece() == null) {
-                System.out.print("x" + " ");
+                System.out.print("-" + "  ");
             } else {
-                System.out.print( board[i].getPiece().toString() + " ");
+                System.out.print(board[i].getPiece().toString() + "  ");
             }
             if (i == ((7 * x) + y) && i>1) {
                 System.out.println("  " + Colour.GREEN + x + Colour.RESET);
@@ -95,7 +79,7 @@ public class Board {
                 y++;
             }
         }
-        System.out.println(Colour.GREEN + "\na b c d e f g h\n" + Colour.RESET);
+        System.out.println(Colour.GREEN + "\na  b  c  d  e  f  g  h\n" + Colour.RESET);
     }
 
 }

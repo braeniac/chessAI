@@ -49,9 +49,8 @@ public class Bishop implements Piece {
                 destination += offsets[i];
                 if(Utility.isValid(destination)) {
                     //exceptions
-                    if (checkColumnException(this.piecePosition, offsets[i]))
-                        continue;
-                    //if the tile is empty -- nonattacking move
+                    if (checkColumnException(this.piecePosition, offsets[i])) continue;
+                    //if the tile is empty -- non-attacking move
                     if (!board.getTile(destination).isOccupied()) {
                         list.add(destination);
                     } else {
@@ -65,7 +64,6 @@ public class Bishop implements Piece {
                 }
             }
         }
-
         return list;
     }
 
@@ -92,8 +90,16 @@ public class Bishop implements Piece {
         return this.name;
     }
 
-    public String toString() {
-        return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name + Colour.RESET;
+    public boolean isKing() {
+        return false;
     }
+
+    public int getPiecePosition() { return piecePosition; }
+
+    public String toString() {
+        return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name.toLowerCase() + Colour.RESET;
+    }
+
+
 
 }

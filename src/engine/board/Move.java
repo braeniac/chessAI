@@ -36,7 +36,7 @@ public class Move {
     }
 
     //This method is an attacking move
-    public static void attackingMove(final Board board, final Player player, final int start, final int end) {
+    public static void attackingMove(final Board board, final Player player, final Player opponent, final int start, final int end) {
 
         Tile startTile = board.getTile(start);
         Tile endTile = board.getTile(end);
@@ -55,15 +55,18 @@ public class Move {
             myPiece.setPiecePosition(end);
         }
 
-        //update the acquired pieces
-        player.updateOpponentPieces(opponentPiece);
+        //opponent loses piece -- remove piece from list of pieces
+        opponent.update(opponentPiece);
+
+        //player acquires opponent piece
+        player.acquirePiece(opponentPiece);
 
         //if piece moves for the very first time -- mark it
         if (!myPiece.getFirstMove()) {
             myPiece.firstMove();
         }
-    }
 
+    }
 
     //This method allows for pawn promotion
     private static void pawnPromotion(final Piece myPiece, final int end, final Tile endTile) {
@@ -90,5 +93,21 @@ public class Move {
         }
     }
 
+
+    private static void castleMove() {
+
+    }
+
+    private static void castleKingSide() {
+
+    }
+
+    private static void castleQueenSide() {
+
+    }
+
+    private static void enpassant() {
+
+    }
 
 }

@@ -1,111 +1,130 @@
 import engine.board.Board;
+import engine.player.BlackPlayer;
 import engine.player.Player;
+import engine.player.WhitePlayer;
 import engine.utility.Check;
-import engine.utility.Set;
 import engine.utility.Utility;
 
+import javax.sound.midi.Soundbank;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Driver {
 
-    //system information
-    private Scanner in;
-
-    //game information
+    //board information
     private Board board;
-    private Boolean winner;
-    private Boolean validMove;
-    private int turn;
 
     //player information
     private Player human;
     private Player AI;
-    private String player;
-    private String input;
-    private int[] command;
+    private Player current;
+    private Scanner in;
+    private String move;
+    private int[] fromTo;
     private int start;
     private int end;
 
+    //game information
+    private int turn;
+    private boolean winner;
+    private boolean isInCheck;
+    private boolean draw;
+    private boolean validMove;
 
     public Driver() {
 
-        //create instance of game board
-        board = new Board();
+        //create board
+        board = Board.getInstance();
 
-        //allows for user input
+        //create players
+        human = WhitePlayer.getInstance();
+        AI = BlackPlayer.getInstance();
+
+        //user input
         in = new Scanner(System.in);
 
-        //player information
-        human = new Player(Set.WHITE, "human");
-        AI = new Player(Set.BLACK, "AI");
+        //players set board with pieces
+        board.setBoard(AI.getPieces(), human.getPieces());
 
-        //game information
-        winner = false;
-        player = "human";
+        //initial settings
+        current = human;
         turn = 0;
+        winner = false;
+        isInCheck = false;
 
         //game loop
-        while(true) {
+        while (true) {
 
-            do {
-                //print game board
-                board.print();
-
-                if (player == human.getName()) {
-                    System.out.print("Human, make your move (i.e a7,a6):  ");
-                    input = in.nextLine().toLowerCase();
-                    if (input.equals("exit")) {
-                        System.exit(0);
-                    } else {
-                        command = Utility.readCommand(input);
-                        start = command[0];
-                        end = command[1];
-                        validMove = Check.validate(human, board, start, end);
-                    }
-                } else if (player == AI.getName()) {
-                    System.out.print("AI, moves (i.e a7,a6):  ");
-                    input = in.nextLine();
-                    command = Utility.readCommand(input);
-                    start = command[0];
-                    end = command[1];
-                    validMove = Check.validate(AI, board, start, end);
-                }
-                if (!validMove) {
-                    System.out.println("\nPlease try again!");
-                }
-
-            } while (!validMove);
-
-            //makes the move
-            if (player == "human") {
-                human.makeMove(board, start, end);
-                System.out.println("Acquired pieces: " + human.getOpponentPieces());
-            } else {
-                AI.makeMove(board, start, end);
-                System.out.println("Acquired pieces: " + AI.getOpponentPieces());
+            if (draw) {
+                System.out.println("Draw Game: ");
+                break;
             }
 
-            //check if player has winning move
-            winner = Check.hasWinningMove();
+            do {
+                board.print();
+                if (current.getName().equals(human.getName())) {
+                    System.out.println("Available pieces: " + human.getPieces());
+                    System.out.println("Acquired pieces: " + human.getOpponentPieces());
+                    System.out.print("Human, make your move (i.e) a7,a6): ");
+                    move = in.nextLine().toLowerCase();
+                    fromTo = Utility.readCommand(move);
+                    start = fromTo[0];
+                    end = fromTo[1];
+                    isInCheck = Check.isInCheck(current, AI, board);
+                    validMove = Check.isMoveLegal(current, board, start, end);
+                } else if (current.getName().equals(AI.getName())) {
+                    System.out.println("Available pieces: " + AI.getPieces());
+                    System.out.println("Acquired pieces: " + AI.getOpponentPieces());
+                    System.out.print("AI, moves (i.e a7,a6):  ");
+                    move = in.nextLine();
+                    fromTo = Utility.readCommand(move);
+                    start = fromTo[0];
+                    end = fromTo[1];
+                    isInCheck = Check.isInCheck(current, human, board);
+                    validMove = Check.isMoveLegal(current, board, start, end);
+                }
 
-            //break out if current player has winning move
+                if (!validMove) {
+                    System.out.println("\nPlease try again! ");
+                }
+
+                if (isInCheck) {
+                    System.out.println("\nOops your in check, you must protect your king! ");
+                }
+
+            } while (!validMove || isInCheck);
+
+            //make move
+            if (current.getName().equals(human.getName())) {
+                human.makeMove(board, AI, start, end);
+            } else {
+                AI.makeMove(board, human, start, end);
+            }
+
+            //does the current player have a checkmate
+
+
             if (winner) {
-                System.out.println("\nWinning board: ");
+                System.out.println(current.getName() + " Wins!" );
+                System.out.println("Winning board: ");
                 break;
             }
 
             //change player
-            if (player == "human") {
-                player = "AI";
-            } else if (player == "AI") {
-                player = "human";
+            if (current.getName().equals(human.getName())) {
+                current = AI;
+            } else if (current.getName().equals(AI.getName())) {
+                current = human;
             }
 
-            //update turn
+            //increment turn
             turn++;
 
         }
+
+        //print draw/winning board
         board.print();
+        in.close();
 
     } //constructor
 

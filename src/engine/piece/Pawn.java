@@ -4,7 +4,6 @@ import engine.utility.Set;
 import engine.utility.Colour;
 import engine.board.Board;
 import engine.utility.Utility;
-import jdk.jshell.execution.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,16 +28,13 @@ public class Pawn implements Piece {
         this.piecePosition = piecePosition;
     }
 
-
     public void setSet(Set set) {
         this.set = set;
     }
 
-
     public Set getSet() {
         return set;
     }
-
 
     //This method calculates and returns a list of legal moves of the PAWN piece
     public List<Integer> legalMoves(Board board) {
@@ -112,8 +108,12 @@ public class Pawn implements Piece {
         return this.name;
     }
 
+    public int getPiecePosition() { return piecePosition; }
+
+    public boolean isKing() { return false; }
+
     public String toString() {
-        return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name + Colour.RESET;
+        return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name.toLowerCase() + Colour.RESET;
     }
 
 }

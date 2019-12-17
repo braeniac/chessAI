@@ -13,4 +13,6 @@ public interface Piece {
     String getName();
     void firstMove();
     boolean getFirstMove();
+    boolean isKing();
+    int getPiecePosition();
 }

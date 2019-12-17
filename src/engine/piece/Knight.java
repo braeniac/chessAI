@@ -46,8 +46,7 @@ public class Knight implements Piece {
            //if destination is within bounds
            if (Utility.isValid(destination)) {
                //if offset rule breaks down in specified columns
-               if (checkColumnException(this.piecePosition, offsets[i]))
-                   continue;
+               if (checkColumnException(this.piecePosition, offsets[i])) continue;
                //if destination tile is NOT occupied
                if (!board.getTile(destination).isOccupied()) {
                    list.add(destination);
@@ -84,13 +83,16 @@ public class Knight implements Piece {
         this.firstMove = true;
     }
 
-
     public boolean getFirstMove() {
         return this.firstMove;
     }
 
+    public int getPiecePosition() { return piecePosition; }
+
+    public boolean isKing() { return false; }
+
     public String toString() {
-        return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name + Colour.RESET;
+        return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name.toLowerCase() + Colour.RESET;
     }
 
 }

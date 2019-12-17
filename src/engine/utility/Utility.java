@@ -1,9 +1,6 @@
 package engine.utility;
 
-import engine.board.Tile;
-
 public class Utility {
-
 
     //can't instantiate the Utility object
     private Utility() { }
@@ -14,41 +11,14 @@ public class Utility {
         return (coordinate < 64 && coordinate >= 0);
     }
 
-    //This method will return a (deep) clone of the existing board
-    public static Tile[] getClone(Tile[] board) {
-        Tile[] clone = new Tile[board.length];
-        for (int i=0; i<clone.length; i++) {
-            clone[i] = new Tile(board[i].getCoordinate(), board[i].getPiece());
-        }
-        return clone;
-    } //getClone
-
-    //This method returns array coordinate based on user command => (from, to)
-    //example: User command (a7,a6) will return (48,40)
-    public static int[] readCommand(final String command) {
-        //store command in array
-        //command format (from , to)
-        //array format fromTo[0] = from and fromTo[1] = to
-        String[] fromTo = command.toLowerCase().split(",");
-        int[] result = new int[2];
-        for (int i=0; i<board.length; i++) {
-            //if from matches the board return index
-            if (fromTo[0].equals(board[i])) {
-                result[0] = i;
-            }
-            //if from matches the board return index
-            if (fromTo[1].equals(board[i])) {
-                result[1] = i;
-            }
-        }
-        return result;
-    }
-
-    //This method returns the coordinate label
-    //example: Tile coordinate 40 returns label "a6"
-    public static String revert(final int coordinate) {
-        return board[coordinate];
-    }
+//    //This method will return a (deep) clone of the existing board
+//    public static Tile[] getClone(Tile[] board) {
+//        Tile[] clone = new Tile[board.length];
+//        for (int i=0; i<clone.length; i++) {
+//            clone[i] = new Tile(board[i].getCoordinate(), board[i].getPiece());
+//        }
+//        return clone;
+//    } //getClone
 
     private static final String[] board = {
             "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1",
@@ -60,6 +30,33 @@ public class Utility {
             "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",
             "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
     };
+
+    //This method returns the coordinate label
+    //example: Tile coordinate 40 returns label "a6"
+    public static String revert(final int coordinate) {
+        return board[coordinate];
+    }
+
+    //This method returns array coordinate based on user command => (from, to)
+    //example: User command (a7,a6) will return (48,40)
+    public static int[] readCommand(final String command) {
+        //store command in array
+        //command format (from , to)
+        //array format fromTo[0] = from and fromTo[1] = to
+        String[] fromTo = command.toLowerCase().split(",");
+        int[] result = new int[2];
+        for (int i = 0; i < board.length; i++) {
+            //if from matches the board return index
+            if (fromTo[0].equals(board[i])) {
+                result[0] = i;
+            }
+            //if from matches the board return index
+            if (fromTo[1].equals(board[i])) {
+                result[1] = i;
+            }
+        }
+        return result;
+    }
 
     public static final boolean[] isFirstColumn = {
             true, false, false, false, false, false, false, false,
@@ -81,50 +78,6 @@ public class Utility {
             false, true, false, false, false, false, false, false,
             false, true, false, false, false, false, false, false,
             false, true, false, false, false, false, false, false,
-    };
-
-    public static final boolean[] isThirdColumn = {
-            false, false, true, false, false, false, false, false,
-            false, false, true, false, false, false, false, false,
-            false, false, true, false, false, false, false, false,
-            false, false, true, false, false, false, false, false,
-            false, false, true, false, false, false, false, false,
-            false, false, true, false, false, false, false, false,
-            false, false, true, false, false, false, false, false,
-            false, false, true, false, false, false, false, false,
-    };
-
-    public static final boolean[] isFourthColumn = {
-            false, false, false, true, false, false, false, false,
-            false, false, false, true, false, false, false, false,
-            false, false, false, true, false, false, false, false,
-            false, false, false, true, false, false, false, false,
-            false, false, false, true, false, false, false, false,
-            false, false, false, true, false, false, false, false,
-            false, false, false, true, false, false, false, false,
-            false, false, false, true, false, false, false, false,
-    };
-
-    public static final boolean[] isFifthColumn = {
-            false, false, false, false, true, false, false, false,
-            false, false, false, false, true, false, false, false,
-            false, false, false, false, true, false, false, false,
-            false, false, false, false, true, false, false, false,
-            false, false, false, false, true, false, false, false,
-            false, false, false, false, true, false, false, false,
-            false, false, false, false, true, false, false, false,
-            false, false, false, false, true, false, false, false,
-    };
-
-    public static final boolean[] isSixthColumn = {
-            false, false, false, false, false, true, false, false,
-            false, false, false, false, false, true, false, false,
-            false, false, false, false, false, true, false, false,
-            false, false, false, false, false, true, false, false,
-            false, false, false, false, false, true, false, false,
-            false, false, false, false, false, true, false, false,
-            false, false, false, false, false, true, false, false,
-            false, false, false, false, false, true, false, false,
     };
 
     public static final boolean[] isSeventhColumn = {
