@@ -37,7 +37,6 @@ public class Check {
         }
 
         return (isMyPiece && legalMove);
-
     }
 
     //This method checks to see if players king is in check
@@ -69,15 +68,32 @@ public class Check {
         return false;
     }
 
-    public boolean isInStaleMate() {
+    //This method checks if game board is in stale mate
+    public static boolean isInStaleMate(final Player current, final Player opponent, final Board board) {
+
 
         return false;
     }
 
-    public static boolean isInCheckMate() {
 
+    //This method checks if the game board is in check mate
+    public static boolean isInCheckMate(final Player current, final Player opponent, final Board board) {
+        if (isInCheck(current, opponent, board) && kingUnableToEscape()) {
+            return true;
+        }
         return false;
     }
+
+    //Helper method --
+    private static boolean kingUnableToEscape() {
+
+
+
+
+        return true;
+    }
+
+
 
 
 }

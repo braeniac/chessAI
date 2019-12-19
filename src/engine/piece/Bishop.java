@@ -94,6 +94,10 @@ public class Bishop implements Piece {
         return false;
     }
 
+    public boolean isRook() {
+        return false;
+    }
+
     public int getPiecePosition() { return piecePosition; }
 
     public String toString() {

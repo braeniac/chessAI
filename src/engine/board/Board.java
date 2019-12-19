@@ -1,36 +1,22 @@
 package engine.board;
 
-import engine.player.*;
-import engine.utility.Set;
 import engine.piece.*;
 import engine.utility.Colour;
-import engine.player.BlackPlayer;
-import engine.player.WhitePlayer;
 
 import java.util.List;
 
 public class Board {
 
-    //can only have a single instance of the board class
-    private static Board SINGLE_INSTANCE = null;
-
     private static final int BOARD_SIZE = 64;
     private Tile[] board;
 
-    private Board() {
+    public Board() {
         //create the game board
         board = new Tile[BOARD_SIZE];
         for (int i=0; i<BOARD_SIZE; i++) {
             board[i] = new Tile(i);
         }
     } //constructor
-
-    public static Board getInstance() {
-        if (SINGLE_INSTANCE == null) {
-            SINGLE_INSTANCE = new Board();
-        }
-        return SINGLE_INSTANCE;
-    }
 
     //This method returns the board
     public Tile[] getBoard() {
@@ -59,6 +45,10 @@ public class Board {
         }
 
     } //setBoard
+
+    public void setCloneBoard(final Tile[] board) {
+        this.board = board;
+    }
 
     //This method prints the board to the console
     public void print() {

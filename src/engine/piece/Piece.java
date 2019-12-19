@@ -14,5 +14,6 @@ public interface Piece {
     void firstMove();
     boolean getFirstMove();
     boolean isKing();
+    boolean isRook();
     int getPiecePosition();
 }

@@ -88,6 +88,10 @@ public class King implements Piece {
 
     public boolean isKing() { return true; }
 
+    public boolean isRook() {
+        return false;
+    }
+
     public String toString() {
         return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name.toLowerCase() + Colour.RESET;
     }

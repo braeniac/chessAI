@@ -1,5 +1,7 @@
 package engine.utility;
 
+import engine.board.Tile;
+
 public class Utility {
 
     //can't instantiate the Utility object
@@ -11,14 +13,14 @@ public class Utility {
         return (coordinate < 64 && coordinate >= 0);
     }
 
-//    //This method will return a (deep) clone of the existing board
-//    public static Tile[] getClone(Tile[] board) {
-//        Tile[] clone = new Tile[board.length];
-//        for (int i=0; i<clone.length; i++) {
-//            clone[i] = new Tile(board[i].getCoordinate(), board[i].getPiece());
-//        }
-//        return clone;
-//    } //getClone
+    //This method will return a (deep) clone of the existing board
+    public static Tile[] getClone(Tile[] board) {
+        Tile[] clone = new Tile[board.length];
+        for (int i=0; i<clone.length; i++) {
+            clone[i] = new Tile(board[i].getCoordinate(), board[i].getPiece());
+        }
+        return clone;
+    } //getClone
 
     private static final String[] board = {
             "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1",

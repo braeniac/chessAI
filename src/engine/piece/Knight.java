@@ -91,6 +91,10 @@ public class Knight implements Piece {
 
     public boolean isKing() { return false; }
 
+    public boolean isRook() {
+        return false;
+    }
+
     public String toString() {
         return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name.toLowerCase() + Colour.RESET;
     }

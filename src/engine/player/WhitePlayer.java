@@ -61,6 +61,12 @@ public class WhitePlayer extends Player {
         return playerKing;
     }
 
+    public void removeAcquiredPiece() {
+        if (opponentPieces.size() > 0) {
+            opponentPieces.remove(opponentPieces.size() - 1);
+        }
+    }
+
     private List<Piece> whitePieces() {
 
         Pawn APawn = new Pawn(48, Set.WHITE);
@@ -75,8 +81,8 @@ public class WhitePlayer extends Player {
         Rook   LWRook   = new Rook  (56, Set.WHITE);
         Knight LWKnight = new Knight(57, Set.WHITE);
         Bishop LWBishop = new Bishop(58, Set.WHITE);
-        King   WKing    = new King  (59, Set.WHITE);
-        Queen  WQueen   = new Queen (60, Set.WHITE);
+        Queen  WQueen   = new Queen (59, Set.WHITE);
+        King   WKing    = new King  (60, Set.WHITE);
         Bishop RWBishop = new Bishop(61, Set.WHITE);
         Knight RWKnight = new Knight(62, Set.WHITE);
         Rook   RWRook   = new Rook  (63, Set.WHITE);
@@ -94,8 +100,8 @@ public class WhitePlayer extends Player {
         whitePieces.add(LWRook);
         whitePieces.add(LWKnight);
         whitePieces.add(LWBishop);
-        whitePieces.add(WKing);
         whitePieces.add(WQueen);
+        whitePieces.add(WKing);
         whitePieces.add(RWBishop);
         whitePieces.add(RWKnight);
         whitePieces.add(RWRook);

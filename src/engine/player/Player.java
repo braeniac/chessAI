@@ -29,5 +29,6 @@ public abstract class Player {
     public abstract void acquirePiece(final Piece piece);
     public abstract void update(final Piece piece);
     public abstract King getPlayerKing();
+    public abstract void removeAcquiredPiece();
 
 }

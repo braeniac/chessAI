@@ -57,7 +57,6 @@ public class Move {
 
         //opponent loses piece -- remove piece from list of pieces
         opponent.update(opponentPiece);
-
         //player acquires opponent piece
         player.acquirePiece(opponentPiece);
 
@@ -93,21 +92,5 @@ public class Move {
         }
     }
 
-
-    private static void castleMove() {
-
-    }
-
-    private static void castleKingSide() {
-
-    }
-
-    private static void castleQueenSide() {
-
-    }
-
-    private static void enpassant() {
-
-    }
 
 }

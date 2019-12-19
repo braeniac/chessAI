@@ -54,6 +54,12 @@ public class BlackPlayer extends Player {
         opponentPieces.add(piece);
     }
 
+    public void removeAcquiredPiece() {
+        if (opponentPieces.size() > 0) {
+            opponentPieces.remove(opponentPieces.size() - 1);
+        }
+    }
+
     public void update(final Piece piece) {
         blackPieces.remove(piece);
     }
@@ -67,8 +73,8 @@ public class BlackPlayer extends Player {
         Rook   LBRook   = new Rook  (0, Set.BLACK);
         Knight LBKnight = new Knight(1, Set.BLACK);
         Bishop LBBishop = new Bishop(2, Set.BLACK);
-        King   BKing    = new King  (3, Set.BLACK);
-        Queen  BQueen   = new Queen (4, Set.BLACK);
+        Queen  BQueen   = new Queen (3, Set.BLACK);
+        King   BKing    = new King  (4, Set.BLACK);
         Bishop RBBishop = new Bishop(5, Set.BLACK);
         Knight RBKnight = new Knight(6, Set.BLACK);
         Rook   RBRook   = new Rook  (7, Set.BLACK);
@@ -87,8 +93,8 @@ public class BlackPlayer extends Player {
         blackPieces.add(LBRook);
         blackPieces.add(LBKnight);
         blackPieces.add(LBBishop);
-        blackPieces.add(BKing);
         blackPieces.add(BQueen);
+        blackPieces.add(BKing);
         blackPieces.add(RBBishop);
         blackPieces.add(RBKnight);
         blackPieces.add(RBRook);

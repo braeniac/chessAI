@@ -93,6 +93,10 @@ public class Rook implements Piece {
 
     public boolean isKing() { return false; }
 
+    public boolean isRook() {
+        return true;
+    }
+
     public String toString() {
         return (this.set == Set.BLACK) ?  Colour.RED + name + Colour.RESET :  Colour.BLUE + name.toLowerCase() + Colour.RESET;
     }

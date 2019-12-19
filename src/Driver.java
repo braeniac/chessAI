@@ -1,12 +1,11 @@
 import engine.board.Board;
+import engine.player.AI.AlphaBeta;
 import engine.player.BlackPlayer;
 import engine.player.Player;
 import engine.player.WhitePlayer;
 import engine.utility.Check;
 import engine.utility.Utility;
 
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Driver {
@@ -17,7 +16,9 @@ public class Driver {
     //player information
     private Player human;
     private Player AI;
+    private AlphaBeta alphaBeta;
     private Player current;
+    private Player opponent;
     private Scanner in;
     private String move;
     private int[] fromTo;
@@ -34,11 +35,14 @@ public class Driver {
     public Driver() {
 
         //create board
-        board = Board.getInstance();
+        board = new Board();
 
         //create players
         human = WhitePlayer.getInstance();
         AI = BlackPlayer.getInstance();
+
+        //AI moves
+        alphaBeta = new AlphaBeta();
 
         //user input
         in = new Scanner(System.in);
@@ -47,41 +51,58 @@ public class Driver {
         board.setBoard(AI.getPieces(), human.getPieces());
 
         //initial settings
-        current = human;
         turn = 0;
-        winner = false;
+        current = human;
+        opponent = AI;
         isInCheck = false;
+        winner = false;
+        draw = false;
 
         //game loop
         while (true) {
 
-            if (draw) {
-                System.out.println("Draw Game: ");
-                break;
-            }
-
             do {
                 board.print();
                 if (current.getName().equals(human.getName())) {
+
                     System.out.println("Available pieces: " + human.getPieces());
                     System.out.println("Acquired pieces: " + human.getOpponentPieces());
                     System.out.print("Human, make your move (i.e) a7,a6): ");
+
                     move = in.nextLine().toLowerCase();
                     fromTo = Utility.readCommand(move);
                     start = fromTo[0];
                     end = fromTo[1];
-                    isInCheck = Check.isInCheck(current, AI, board);
                     validMove = Check.isMoveLegal(current, board, start, end);
+
+                    if (validMove) {
+                        Board temp = new Board();
+                        temp.setCloneBoard(Utility.getClone(board.getBoard()));
+                        current.makeMove(temp, AI, start, end);
+                        current.removeAcquiredPiece();
+                        isInCheck = Check.isInCheck(current, AI, temp);
+                    }
+
                 } else if (current.getName().equals(AI.getName())) {
+
                     System.out.println("Available pieces: " + AI.getPieces());
                     System.out.println("Acquired pieces: " + AI.getOpponentPieces());
-                    System.out.print("AI, moves (i.e a7,a6):  ");
-                    move = in.nextLine();
-                    fromTo = Utility.readCommand(move);
+                    System.out.print("AI, moves:  ");
+
+                    fromTo = alphaBeta.makeMove(current, board);
                     start = fromTo[0];
                     end = fromTo[1];
-                    isInCheck = Check.isInCheck(current, human, board);
+                    System.out.println(Utility.revert(start) + ", " + Utility.revert(end));
                     validMove = Check.isMoveLegal(current, board, start, end);
+
+                    if (validMove) {
+                        Board temp = new Board();
+                        temp.setCloneBoard(Utility.getClone(board.getBoard()));
+                        current.makeMove(temp, human, start, end);
+                        current.removeAcquiredPiece();
+                        isInCheck = Check.isInCheck(current, human, temp);
+                    }
+
                 }
 
                 if (!validMove) {
@@ -94,18 +115,26 @@ public class Driver {
 
             } while (!validMove || isInCheck);
 
-            //make move
+            //make move -- check if opponent is in check
             if (current.getName().equals(human.getName())) {
                 human.makeMove(board, AI, start, end);
+                if (Check.isInCheck(AI, current, board)) System.out.println("\nYour in check, you must protect your king! ");
             } else {
                 AI.makeMove(board, human, start, end);
+                if (Check.isInCheck(human, current, board)) System.out.println("\nYour in check, you must protect your king! ");
             }
 
-            //does the current player have a checkmate
+            draw = Check.isInStaleMate(current, opponent, board);
 
+            if (draw) {
+                System.out.println("Draw Game: ");
+                break;
+            }
+
+            winner = Check.isInCheckMate(current, opponent, board);
 
             if (winner) {
-                System.out.println(current.getName() + " Wins!" );
+                System.out.println("\n" + current.getName().toUpperCase() + " WINS!" );
                 System.out.println("Winning board: ");
                 break;
             }
@@ -113,13 +142,14 @@ public class Driver {
             //change player
             if (current.getName().equals(human.getName())) {
                 current = AI;
+                opponent = human;
             } else if (current.getName().equals(AI.getName())) {
                 current = human;
+                opponent = AI;
             }
 
             //increment turn
             turn++;
-
         }
 
         //print draw/winning board
