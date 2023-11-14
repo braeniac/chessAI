@@ -93,6 +93,10 @@ public class Driver {
                     start = fromTo[0];
                     end = fromTo[1];
                     System.out.println(Utility.revert(start) + ", " + Utility.revert(end));
+//                    move = in.nextLine();
+//                    fromTo = Utility.readCommand(move);
+//                    start = fromTo[0];
+//                    end = fromTo[1];
                     validMove = Check.isMoveLegal(current, board, start, end);
 
                     if (validMove) {

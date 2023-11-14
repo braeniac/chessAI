@@ -70,8 +70,9 @@ public class Check {
 
     //This method checks if game board is in stale mate
     public static boolean isInStaleMate(final Player current, final Player opponent, final Board board) {
-
-
+        if (isInCheck(current, opponent, board) && !kingUnableToEscape()) {
+//            return true;
+        }
         return false;
     }
 
@@ -79,7 +80,7 @@ public class Check {
     //This method checks if the game board is in check mate
     public static boolean isInCheckMate(final Player current, final Player opponent, final Board board) {
         if (isInCheck(current, opponent, board) && kingUnableToEscape()) {
-            return true;
+//            return true;
         }
         return false;
     }
@@ -87,13 +88,7 @@ public class Check {
     //Helper method --
     private static boolean kingUnableToEscape() {
 
-
-
-
         return true;
     }
-
-
-
 
 }
